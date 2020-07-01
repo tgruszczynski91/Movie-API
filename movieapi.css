@@ -1,0 +1,418 @@
+@import url('https://fonts.googleapis.com/css2?family=Balsamiq+Sans&family=Ubuntu&display=swap');
+
+/* General Settings */
+
+* {
+    outline: none !important;
+    font-family: 'Ubuntu';
+}
+
+h2 {
+    text-transform: uppercase;
+}
+
+.container img {
+    border-radius: 15px;
+}
+
+/* Div Alert */
+
+.alert {
+    display: none;
+    justify-content: center;
+    margin: 0 !important;
+    font-size: 25px;
+    text-transform: uppercase;
+}
+
+/* Navigation Bar */
+
+.bi-film {
+    color: gold;
+    margin: 15px;
+}
+
+.bi-star-fill {
+    color: gold;
+}
+
+.navbar a {
+    color: white;
+}
+
+.navbar a:hover {
+    color: grey;
+}
+
+/* Search Movie Button */
+
+.search-movie {
+padding: 9px;
+color: white;
+background-color: black;
+border: none;
+}
+
+/* Input */
+
+.navbar-nav {
+    margin: 20px !important;
+}
+
+#input {
+    width: 600px;
+}
+
+/* Jumbotron */
+
+.jumbotron {
+    min-height: 75vh;
+    color: #efefef;
+    background-color: #bcbcbc;
+    padding: 30px;
+    text-shadow: 2px 2px black;
+    position: relative;
+}
+
+.jumbotron h2 {
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.jumbotron-desc {
+    position: absolute;
+    bottom: 0;
+    left: 10;
+}
+
+.lead {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    font-size: 20px;
+}
+
+.ratings {
+    margin: 0px !important;
+    padding: 10px;
+}
+
+.origin {
+    margin: 0px !important;
+    padding: 10px 0;
+}
+
+.votes {
+    margin: 0px !important;
+    padding: 10px ;
+    font-size: 15px;
+}
+
+.rating-div {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    font-size: 25px;
+    padding-bottom: 20px;
+}
+
+/* Movie overall details */
+
+.container-overview {
+ display: flex;
+ flex-direction: row;
+ width: 100%;
+ min-height: 50vh;
+ margin-bottom: 50px;
+}
+
+.movie-details-left {
+    width: 50%;
+}
+.movie-details-right {
+    width: 50%;
+}
+
+/* Movie Details */
+
+.movie-poster {
+    width: 20%;
+    margin-bottom: 20px;
+}
+
+.movie-description {
+    display: flex;
+    flex-direction: column;
+    padding: 0 25px;
+    width: 80%;
+}
+
+.movie-description span {
+    color: #BCBCBC;
+    width: 20%;
+}
+
+.movie-details-overall {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.movie-details-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.movie-details-director:hover {
+    color: gold;
+    cursor: pointer;
+}
+
+.movie-details-writer:hover {
+    color: gold;
+    cursor: pointer;
+}
+
+.release-date {
+    width: 30%;
+}
+
+/* Cast Div */
+
+.cast-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 70vh;
+}
+
+.cast-container h2 {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 30px;
+}
+
+.card {
+    border: none;
+    width: 150px !important;
+    overflow: hidden;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.card:hover {
+    box-shadow: 0px 16px 11px 14px rgba(242,242,242,1);
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    padding: 10px !important;
+    font-size: 10px;
+}
+
+.actor-image {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+	transform: scale(1);
+    transition: .3s ease-in-out;
+    height: 230px;
+    width: 150px;
+}
+
+.actor-image:hover {
+	transform: scale(1.1);
+}
+
+.actor {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 15px;
+}
+
+.actor:hover {
+    color: gold;
+}
+
+.role {
+    text-align: center;
+    font-size: 10px;
+    color: grey;
+}
+
+/* Cast Button */
+
+.cast-button-div {
+    display: flex;
+    justify-content: center;
+}
+
+.cast-Button {
+    width: 25%;
+    border-radius: 10px;
+    margin-top: 40px;
+    background-color: white;
+    padding: 10px;
+    border: 2px solid black;
+    transition: all .7s ease;
+}
+
+.cast-Button:hover {
+    color: white;
+    background-color: black;
+}
+
+/* Recomended Div */
+
+.recomended-Container {
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+}
+
+.scrolling-wrapper {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+}
+
+/* Recomended movies tiles */
+
+.cards {
+    flex: 0 0 auto;
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.cards:hover {
+    cursor: pointer;
+    box-shadow: 0px 16px 11px 14px rgba(242,242,242,1);
+}
+
+.cards img {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    height: 200px;
+    width: 350px;
+	transform: scale(1);
+	transition: .3s ease-in-out;
+}
+
+.cards img:hover {
+    border-radius: 10px;
+    opacity: 0.8;
+    cursor: pointer;
+	transform: scale(1.1);
+}
+
+.recomended-span {
+    margin: 20px;
+    width: 90%;
+}
+
+/* Review Div */
+
+.reviews-container {
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.media {
+    padding: 20px;
+    border: 2px solid #DFDFDF;
+    margin: 20px 0;
+}
+
+.see-more {
+    color: grey;
+    text-decoration: none;
+}
+
+.see-more:hover {
+    color: grey;
+}
+
+
+.align-self-start {
+    height: 50px;
+    width: 50px;
+}
+
+/* Footer */
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10vh;
+    background-color: black;
+    color: white;
+}
+
+/* Responsive Design */
+
+
+@media (max-width:1200px) {
+    #input {
+        width: 400px;
+    }
+}
+
+@media (max-width:991px) {
+    #input {
+        width: 80%;
+    }
+    .container-overview {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .container-overview span {
+        margin-right: 15px;
+    }
+    .movie-poster {
+        width: 40%;
+    }
+}
+
+@media (max-width: 767px) {
+    .container-overview {
+        align-items: center;
+    }
+    .cast-container {
+        justify-content: center;
+    }
+    .movie-details-overall {
+        flex-direction: column;
+    }
+
+    .movie-details-left {
+        width: 100%;
+    }
+    .movie-details-right {
+        width: 100%;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

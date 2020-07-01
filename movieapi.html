@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Movie API App</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="movieapi.css">
+</head>
+<body>
+    
+  <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: black">
+      <div class=" container nav-container">
+        <svg class="bi bi-film" width="4em" height="4em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M0 1a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V1zm4 0h8v6H4V1zm8 8H4v6h8V9zM1 1h2v2H1V1zm2 3H1v2h2V4zM1 7h2v2H1V7zm2 3H1v2h2v-2zm-2 3h2v2H1v-2zM15 1h-2v2h2V1zm-2 3h2v2h-2V4zm2 3h-2v2h2V7zm-2 3h2v2h-2v-2zm2 3h-2v2h2v-2z"/>
+        </svg>
+        <a class="navbar-brand font-weight-bold text-uppercase" href="#">Movie API</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+               <span class="navbar-toggler-icon"></span>
+            </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <form class="form-inline">
+                <input class="form-control-lg mr-sm-2" id="input" type="search" placeholder="Search a movie" aria-label="Search"> 
+                <button class="search-movie">
+                  <svg class="bi bi-search" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
+                  <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+                  </svg>
+                </button>
+              </form>
+            </li>
+          </ul>
+          <ul class="nav navbar navbar-right">
+            <li class="nav-item"><a class="nav-link" href="#">Log In</a></li>
+          </ul>
+        </div>
+      </div>
+      </nav>
+      
+  <!-- Alert Div -->
+      <div class="alert alert-danger" role="alert">
+      <p>Insert a title of the movie</p>
+      </div>
+      
+  <!-- Jumbrotron Div -->
+      <div class="jumbotron jumbotron-fluid">
+        <div class="jumbotron-desc">
+          <h2 class="display-4 font-weight-bold">Movie title</h2>
+            <p class="lead">year and running time</p>
+            <div class="rating-div">
+              <p class="origin">Origin</p>
+              <p class="ratings">10</p> 
+              <svg class="bi bi-star-fill" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+              </svg>
+              <p class="votes">Count of votes</p>
+            </div>
+        </div>
+      </div>
+
+  <!-- Main Container -->
+  <div class="container">
+
+  <!-- Overall Container -->
+    <div class="container-overview">
+      <div class="movie-poster"><img src="" alt="Responsive Image" class="img-fluid "></div>
+      <div class="movie-description">
+        <h2>Overview</h2>
+        <p class="description"></p>
+        <div class="movie-details-overall">
+        <div class="movie-details-left">
+          <div class="movie-details-row"><span>Director </span> <p class="movie-details-director"></p></div> 
+          <div class="movie-details-row"><span>Writer </span> <p class="movie-details-writer"></p> </div>
+          <div class="movie-details-row"><span>Genre </span> <p class="movie-details-genre"></p> </div>
+          <div class="movie-details-row"><span>Country </span> <p class="movie-details-countryProduction"></p></div>
+        </div>
+        <div class="movie-details-right">
+          <div class="movie-details-row"><span class="release-date">Release Date </span> <p class="movie-details-releaseDate"></p></div>
+          <div class="movie-details-row"><span>Budget </span> <p class="movie-details-budget"></p></div> 
+          <div class="movie-details-row"><span>Revenue </span> <p class="movie-details-revenue"></p></div> 
+        </div>
+        </div>
+      </div>
+    </div>
+
+  <!-- Cast Container -->
+    <div class="cast-container">
+      <h2 class="cast-header">Cast</h2>
+      <div class="row">
+        <div class="col-lg-2 col-md-4 col-sm-4 col-6">
+          <div class="card" style="width: 18rem;">
+            <img src="" class="card-img-top actor-image" alt="...">
+            <div class="card-body">
+              <p class="card-title actor">Actor Name</p>
+              <p class="card-title role">Characters name</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-sm-4 col-6">
+          <div class="card" style="width: 18rem;">
+            <img src="" class="card-img-top actor-image" alt="...">
+            <div class="card-body">
+              <p class="card-title actor">Actor Name</p>
+              <p class="card-title role">Characters name</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-sm-4 col-6">
+          <div class="card" style="width: 18rem;">
+            <img src="" class="card-img-top actor-image" alt="...">
+            <div class="card-body">
+              <p class="card-title actor">Actor Name</p>
+              <p class="card-title role">Characters name</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-sm-4 col-6">
+          <div class="card" style="width: 18rem;">
+            <img src="" class="card-img-top actor-image" alt="...">
+            <div class="card-body">
+              <p class="card-title actor">Actor Name</p>
+              <p class="card-title role">Characters name</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-sm-4 col-6">
+          <div class="card" style="width: 18rem;">
+            <img src="" class="card-img-top actor-image" alt="...">
+            <div class="card-body">
+              <p class="card-title actor">Actor Name</p>
+              <p class="card-title role">Characters name</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-sm-4 col-6">
+          <div class="card" style="width: 18rem;">
+            <img src="" class="card-img-top actor-image" alt="...">
+            <div class="card-body">
+              <p class="card-title actor">Actor Name</p>
+              <p class="card-title role">Characters name</p>
+            </div>
+          </div>
+        </div>
+      </div>
+            <div class="cast-button-div"><button class="cast-Button">See full cast</button></div>
+    </div>
+
+  <!-- Recomended Container -->
+    <div class="recomended-Container">
+      <h2 class="recomended-Header">Similar</h2>
+      <div class="scrolling-wrapper">
+        <div class="cards"><img src="" class="cards-img" alt=""> <span class="recomended-span">Movie</span> </div>
+        <div class="cards"><img src="" class="cards-img" alt=""> <span class="recomended-span">Movie</span> </div>
+        <div class="cards"><img src="" class="cards-img" alt=""> <span class="recomended-span">Movie</span> </div>
+        <div class="cards"><img src="" class="cards-img" alt=""> <span class="recomended-span">Movie</span> </div>
+        <div class="cards"><img src="" class="cards-img" alt=""> <span class="recomended-span">Movie</span> </div>
+        <div class="cards"><img src="" class="cards-img" alt=""> <span class="recomended-span">Movie</span> </div>
+        <div class="cards"><img src="" class="cards-img" alt=""> <span class="recomended-span">Movie</span> </div>
+      </div>
+    </div>
+
+  <!-- Reviews Container -->
+    <div class="reviews-container">
+      <h2>Reviews</h2>
+      <div class="reviews-container-main">
+      </div>
+    </div>
+    </div>
+  <!-- Footer -->
+    <footer>
+    <p>Created by Tomasz Gruszczynski 2020</p>
+    </footer>
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+<script src="movieapi.js"></script>
+</body>
+</html>
