@@ -51,7 +51,7 @@ search.addEventListener('click', function(e){
     e.preventDefault()
     })
 
-//Fetching Data Function
+//Fetching Movie Data Function
 function getMovieData(id){
     fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=9250b9e19854d9deaa571f4074bc38a3&language=en-US&append_to_response=credits` ,{
     method: "GET",
@@ -77,7 +77,7 @@ function getMovieData(id){
     //Movie Details Data
     description.textContent = data.overview;
     const crew = data.credits.crew;
-    crew.forEach(function(crew){
+    crew.forEach(crew => {
         if(crew.job === "Director") {
             director.textContent = crew.name;
         }
@@ -107,6 +107,7 @@ function getMovieData(id){
     })
     sentenceFinal1 = sentence1.slice(0, -3);
     countryProduction.innerHTML = sentenceFinal1;
+    
     //Checking if a movie is released
         if(data.status === 'Released'){
             releaseDate.textContent = data.release_date;
@@ -114,9 +115,9 @@ function getMovieData(id){
         else {releaseDate.textContent = 'This movie is not released yet'}
     
     //Budget and revenue Fetch and checking if there's a data
-        if(data.budget !== 0) {budget.textContent = `${thousands_separators(data.budget)} $`}
+        if(data.budget !== 0) {budget.textContent = `${seperator(data.budget)} $`}
         else {budget.textContent = "unknown"};
-        if(data.revenue !== 0) {revenue.textContent = `${thousands_separators(data.revenue)} $`}
+        if(data.revenue !== 0) {revenue.textContent = `${seperator(data.revenue)} $`}
         else {revenue.textContent = "unknown"}
 
     //Cast Fetch
@@ -125,7 +126,7 @@ function getMovieData(id){
             castHeader.innerHTML = `Cast of ${data.title}`
             for(i = 0; i < 6; i++){
                 actorImage[i].src = `https://image.tmdb.org/t/p/w500/${cast[i].profile_path}`;
-                if(cast[i].profile_path === null ) {actorImage[i].src = "https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png"}
+                if(cast[i].profile_path === null ) {actorImage[i].src = "images/blank-profile.png"}
             }
             for (i = 0; i < 6; i ++){
                 actor[i].innerHTML = cast[i].name;      
@@ -152,7 +153,7 @@ fetch(`https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=9250b9e1
     const recomendedMovie = data.results;
     for(i = 0; i < 7; i++){
     recomendedDiv[i].src = `https://image.tmdb.org/t/p/w500${recomendedMovie[i].backdrop_path}`;
-    if(recomendedMovie[i].backdrop_path === null){recomendedDiv[i].src = 'https://media.jewelfeed.com/tsj-apps/tsj-catalog-local/temp-inventory-landing.jpg'}
+    if(recomendedMovie[i].backdrop_path === null){recomendedDiv[i].src = 'images/recomended-blank.jpg'}
     recomendedTitle[i].innerHTML = recomendedMovie[i].title;
     recomendedHeader.innerHTML = `Similar to ${currentMovie}`
     }
@@ -205,28 +206,9 @@ function showAlert(){
     }
 }
 
-//Seperator functiion
-function thousands_separators(num) {
+//Seperator function
+function separator(num) {
     const num_parts = num.toString().split(".");
     num_parts[0] = num_parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     return num_parts.join(".");
     }
-
-
-
-//   UI.prototype.showAlert = function(message, className){
-//     //Create div
-//     div = document.createElement('div');
-//     //add class
-//     div.className = className;
-//     //add text
-//     div.appendChild(document.createTextNode(message));
-//     //append div
-//     const container = document.querySelector('.container');
-//     const form = document.querySelector('#book-form');
-//     container.insertBefore(div, form)
-//     //dissapear after 3 seconds
-//     setTimeout(function(e){
-//       div.remove()
-//     }, 3000)
-//   }
