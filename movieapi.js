@@ -115,9 +115,9 @@ function getMovieData(id){
         else {releaseDate.textContent = 'This movie is not released yet'}
     
     //Budget and revenue Fetch and checking if there's a data
-        if(data.budget !== 0) {budget.textContent = `${seperator(data.budget)} $`}
+        if(data.budget !== 0) {budget.textContent = `${separator(data.budget)} $`}
         else {budget.textContent = "unknown"};
-        if(data.revenue !== 0) {revenue.textContent = `${seperator(data.revenue)} $`}
+        if(data.revenue !== 0) {revenue.textContent = `${separator(data.revenue)} $`}
         else {revenue.textContent = "unknown"}
 
     //Cast Fetch
