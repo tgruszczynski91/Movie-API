@@ -126,7 +126,7 @@ function getMovieData(id){
             castHeader.innerHTML = `Cast of ${data.title}`
             for(i = 0; i < 6; i++){
                 actorImage[i].src = `https://image.tmdb.org/t/p/w500/${cast[i].profile_path}`;
-                if(cast[i].profile_path === null ) {actorImage[i].src = "images/blank-profile.png"}
+                if(cast[i].profile_path === null ) {actorImage[i].src = "Images/blank-profile.png"}
             }
             for (i = 0; i < 6; i ++){
                 actor[i].innerHTML = cast[i].name;      
@@ -153,7 +153,7 @@ fetch(`https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=9250b9e1
     const recomendedMovie = data.results;
     for(i = 0; i < 7; i++){
     recomendedDiv[i].src = `https://image.tmdb.org/t/p/w500${recomendedMovie[i].backdrop_path}`;
-    if(recomendedMovie[i].backdrop_path === null){recomendedDiv[i].src = 'images/recomended-blank.jpg'}
+    if(recomendedMovie[i].backdrop_path === null){recomendedDiv[i].src = "Images/recomended-blank.jpg'"}
     recomendedTitle[i].innerHTML = recomendedMovie[i].title;
     recomendedHeader.innerHTML = `Similar to ${currentMovie}`
     }
