@@ -1,14 +1,9 @@
 //Variables
 const search = document.querySelector('.search-movie');
 const input = document.querySelector('#input');
-const image = document.querySelector('.img-fluid');
 const jumbotron = document.querySelector('.jumbotron');
-const title = document.querySelector('.display-4')
-const overview = document.querySelector('.lead');
-const alertContainer = document.querySelector('.alert-danger');
-const ratings = document.querySelector('.ratings');
-const language = document.querySelector('.origin');
-const voteCount = document.querySelector('.votes');
+const jumbotronDesc = document.querySelector('.jumbotron-desc');
+const moviePoster = document.querySelector('.movie-poster');
 const description = document.querySelector('.description');
 const director = document.querySelector('.movie-details-director');
 const writer = document.querySelector('.movie-details-writer');
@@ -17,16 +12,13 @@ const countryProduction = document.querySelector('.movie-details-countryProducti
 const releaseDate = document.querySelector('.movie-details-releaseDate');
 const budget = document.querySelector('.movie-details-budget');
 const revenue = document.querySelector('.movie-details-revenue');
-const actorImage = document.querySelectorAll('.actor-image');
-const actor = document.querySelectorAll('.actor');
-const role = document.querySelectorAll('.role');
-const reviewTitle = document.querySelector('.review-title')
-const reviewAuthor = document.querySelector('.review-author')
-const reviewParagraph = document.querySelector('.review-paragraph');
-const recomendedDiv = document.querySelectorAll('.cards-img');
-const recomendedTitle = document.querySelectorAll('.recomended-span');
+const castContainer = document.querySelector('.row');
 const castHeader = document.querySelector('.cast-header');
-const recomendedHeader = document.querySelector('.recomended-Header')
+const buttonDiv = document.querySelector('.cast-button-div');
+const recomendedHeader = document.querySelector('.recomended-Header');
+const recomendedMain = document.querySelector('.scrolling-wrapper');
+const reviewDiv = document.querySelector('.reviews-container-main');
+const alertContainer = document.querySelector('.alert-danger');
 
 //Search Function
 search.addEventListener('click', function(e){
@@ -51,7 +43,7 @@ search.addEventListener('click', function(e){
     e.preventDefault()
     })
 
-//Fetching Movie Data Function
+//Fetching Data Function
 function getMovieData(id){
     fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=9250b9e19854d9deaa571f4074bc38a3&language=en-US&append_to_response=credits` ,{
     method: "GET",
@@ -61,23 +53,28 @@ function getMovieData(id){
 })
 .then(data => {
     //Jumbotron Data 
-    image.src = `https://image.tmdb.org/t/p/w500/${data.poster_path}`;
     jumbotron.style.background = `linear-gradient(rgba(28, 28, 28, 0) 40%, rgba(28, 28, 28, 1)), url(https://image.tmdb.org/t/p/original/${data.backdrop_path}) no-repeat center / cover`;
     const date = data.release_date;
-    overview.textContent = `${date.substring(0,4)} ${data.runtime} minutes`;
-    title.textContent = data.title;
-    ratings.textContent = data.vote_average;
-    voteCount.textContent = `${data.vote_count} votes`;
-        if(data.original_language !== "en") {
-        language.innerHTML = data.original_title;
-        } else {
-        language.innerHTML = '';
-        }
+    jumbotronDesc.innerHTML = `
+    <h2 class="display-4 font-weight-bold">${data.title}</h2>
+    <p class="lead">${date.substring(0,4)} ${data.runtime} minutes</p>
+    <div class="rating-div">
+      <p class="origin">${data.original_language !== "en" ? data.original_title : ''}</p>
+      <p class="ratings">${data.vote_average}</p> 
+      <svg class="bi bi-star-fill" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+      <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+      </svg>
+      <p class="votes">${data.vote_count} votes</p>
+    </div>
+    `
 
     //Movie Details Data
-    description.textContent = data.overview;
     const crew = data.credits.crew;
-    crew.forEach(crew => {
+    moviePoster.innerHTML = `
+    <img src="https://image.tmdb.org/t/p/w500/${data.poster_path}" alt="Responsive Image" class="img-fluid ">
+    `
+    description.textContent = data.overview;
+    crew.forEach(function(crew){
         if(crew.job === "Director") {
             director.textContent = crew.name;
         }
@@ -122,19 +119,26 @@ function getMovieData(id){
 
     //Cast Fetch
     const cast = data.credits.cast;
-    console.log(cast)
             castHeader.innerHTML = `Cast of ${data.title}`
+            output = '';
             for(i = 0; i < 6; i++){
-                actorImage[i].src = `https://image.tmdb.org/t/p/w500/${cast[i].profile_path}`;
-                if(cast[i].profile_path === null ) {actorImage[i].src = "Images/blank-profile.png"}
+                output += `
+                <div class="col-lg-2 col-md-4 col-sm-4 col-6">
+                <div class="card" style="width: 18rem;">
+                  <img src="${cast[i].profile_path === null ? 'Images/blank-profile.png' : `https://image.tmdb.org/t/p/w500/${cast[i].profile_path}` }" class="card-img-top actor-image" alt="...">
+                  <div class="card-body">
+                    <p class="card-title actor">${cast[i].name}</p>
+                    <p class="card-title role">${cast[i].character}</p>
+                  </div>
+                </div>
+              </div>
+                `
+            castContainer.innerHTML = output;
             }
-            for (i = 0; i < 6; i ++){
-                actor[i].innerHTML = cast[i].name;      
-            }
-            for(i = 0; i < 6; i++){
-                role[i].innerHTML = cast[i].character;
-            }
+            buttonDiv.innerHTML = `<button class="cast-Button">See full cast</button>`
             })
+
+
 .catch(function(error){
     console.log(error)
     })
@@ -149,13 +153,16 @@ fetch(`https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=9250b9e1
     return response.json();
 })
 .then(data => {
-    console.log(data)
     const recomendedMovie = data.results;
-    for(i = 0; i < 7; i++){
-    recomendedDiv[i].src = `https://image.tmdb.org/t/p/w500${recomendedMovie[i].backdrop_path}`;
-    if(recomendedMovie[i].backdrop_path === null){recomendedDiv[i].src = "Images/recomended-blank.jpg'"}
-    recomendedTitle[i].innerHTML = recomendedMovie[i].title;
     recomendedHeader.innerHTML = `Similar to ${currentMovie}`
+    output = ''
+    for(i = 0; i < 7; i++){
+        output +=
+        `<div class="cards">
+         <img src="${recomendedMovie[i].backdrop_path === null ? 'Images/recomended-blank.jpg' : `https://image.tmdb.org/t/p/w500${recomendedMovie[i].backdrop_path}`}" class="cards-img" alt="">
+         <span class="recomended-span">${recomendedMovie[i].title}</span>
+         </div>`
+         recomendedMain.innerHTML = output;
     }
 })
 .catch(function(error){
@@ -171,14 +178,13 @@ fetch(`https://api.themoviedb.org/3/movie/${id}/reviews?api_key=9250b9e19854d9de
     return response.json();
 })
 .then(data => {
-    console.log(data);
     const reviewAll = data.results;
     output = '';
     if(reviewAll.length !== 0) {
         reviewAll.forEach(i => {
             output += `
             <div class="media">
-            <img src="https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png" class="align-self-start mr-3 rounded-circle" alt="...">
+            <img src="Images/blank-profile.png" class="align-self-start mr-3 rounded-circle" alt="...">
             <div class="media-body">
             <h5 class="mt-0 review-title"> Review by ${i.author}</h5>
             <p class="review-author">${i.author}</p>
@@ -187,9 +193,9 @@ fetch(`https://api.themoviedb.org/3/movie/${id}/reviews?api_key=9250b9e19854d9de
             </div>
             `  
         })
-        document.querySelector('.reviews-container-main').innerHTML = output;
+        reviewDiv.innerHTML = output;
     }
-    else{document.querySelector('.reviews-container-main').innerHTML = 'There are no reviews for this movie'}
+    else{reviewDiv.innerHTML = 'There are no reviews for this movie'};
 
 })
 .catch(function(error){
@@ -197,8 +203,7 @@ fetch(`https://api.themoviedb.org/3/movie/${id}/reviews?api_key=9250b9e19854d9de
     })
 }
 
-
-  //Show alert
+//Show alert
 function showAlert(){
     if(input.value === '') {
         alertContainer.style.display = "flex";
@@ -206,7 +211,7 @@ function showAlert(){
     }
 }
 
-//Seperator function
+//Seperator functiion
 function separator(num) {
     const num_parts = num.toString().split(".");
     num_parts[0] = num_parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
